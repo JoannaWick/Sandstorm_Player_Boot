@@ -6,43 +6,52 @@
 .PROJECTURI https://github.com/JoannaWick/Sandstorm_Player_Boot
 #>
 
+<# 
+    Resize and center window
+#>
+
 # Read the current OS build framework directly from memory
 $buildNumber = [Environment]::OSVersion.Version.Build
 
 if ($buildNumber -ge 22000) {
-    <# 
-        Resize and center window
-    #>
 
     Add-Type -AssemblyName System.Windows.Forms
     $workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
 
     # Output the width and height
-    $targetWidth  = $workingArea.Width/2
+    $targetWidth  = $workingArea.Width / 2
     $targetHeight = $workingArea.Height
 
     $posX = [math]::Round(($workingArea.Width - $targetWidth) / 2)
     $posY = [math]::Round(($workingArea.Height - $targetHeight) / 2)
 
-    # Find the real outer Windows Terminal process framework running on the desktop
-    $wtProcess = Get-Process -Name "WindowsTerminal" -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 }
+    # FIX: Define both MoveWindow AND GetForegroundWindow in a single C# block
+$Signature = @"
+using System;
+using System.Runtime.InteropServices;
 
-    if ($wtProcess) {
-    $hWnd = $wtProcess.MainWindowHandle
-    $Signature = @"
+public class Win32 {
+    [DllImport("user32.dll")]
+    public static extern IntPtr GetForegroundWindow();
+
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+}
 "@
-        $API = Add-Type -TypeDefinition "using System; using System.Runtime.InteropServices; public class Win32 { $Signature }" -PassThru -ErrorAction SilentlyContinue
+    Add-Type -TypeDefinition $Signature -ErrorAction SilentlyContinue
+
+    # FIX: Snag the active UI window handle directly. 
+    # This completely bypasses process name filtering and permission blocks!
+    $hWnd = [Win32]::GetForegroundWindow()
+
+    if ($hWnd -ne [IntPtr]::Zero) {
+        # Move and resize the current hosting cmd window frame instantly
         [Win32]::MoveWindow($hWnd, $posX, $posY, $targetWidth, $targetHeight, $true)
     } else {
         # Fallback to standard Mode Con formatting if running classic Conhost
         mode con: cols=120 lines=40
     }
 } else {
-    <# 
-        Resize and center window
-    #>
 
     # Load the required .NET assembly
     Add-Type -AssemblyName System.Windows.Forms
