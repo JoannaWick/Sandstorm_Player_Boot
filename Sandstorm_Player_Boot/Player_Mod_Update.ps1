@@ -6,39 +6,78 @@
 .PROJECTURI https://github.com/JoannaWick/Sandstorm_Player_Boot
 #>
 
-# Load the required .NET assembly
-Add-Type -AssemblyName System.Windows.Forms
+# Read the current OS build framework directly from memory
+$buildNumber = [Environment]::OSVersion.Version.Build
 
-# Fetch the working area of the primary display
-$workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+if ($buildNumber -ge 22000) {
+    <# 
+        Resize and center window
+    #>
 
-# Calculations for screen placement (account for Win11 borders)
-$targetWidth  = 1024
-$screenWidth  = [math]::Round(($workingArea.Width - $targetWidth) / 2)
-$screenHeight = $workingArea.Height
+    Add-Type -AssemblyName System.Windows.Forms
+    $workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
 
-# Win32 API Definitions: Grabbing Console window handle and Moving it
+    # Output the width and height
+    $targetWidth  = $workingArea.Width/2
+    $targetHeight = $workingArea.Height
+
+    $posX = [math]::Round(($workingArea.Width - $targetWidth) / 2)
+    $posY = [math]::Round(($workingArea.Height - $targetHeight) / 2)
+
+    # Find the real outer Windows Terminal process framework running on the desktop
+    $wtProcess = Get-Process -Name "WindowsTerminal" -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 }
+
+    if ($wtProcess) {
+    $hWnd = $wtProcess.MainWindowHandle
+    $Signature = @"
+    [DllImport("user32.dll", SetLastError = true)]
+    public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+"@
+        $API = Add-Type -TypeDefinition "using System; using System.Runtime.InteropServices; public class Win32 { $Signature }" -PassThru -ErrorAction SilentlyContinue
+        [Win32]::MoveWindow($hWnd, $posX, $posY, $targetWidth, $targetHeight, $true)
+    } else {
+        # Fallback to standard Mode Con formatting if running classic Conhost
+        mode con: cols=120 lines=40
+    }
+    } else {
+    <# 
+        Resize and center window
+    #>
+
+    # Load the required .NET assembly
+    Add-Type -AssemblyName System.Windows.Forms
+
+    # Fetch the working area of the primary display
+    $workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+
+    # Output the width and height
+    $screenWidth  = ($workingArea.Width-1024)/2
+    $screenHeight = $workingArea.Height
+
+    # Definition for User32 MoveWindow
 $TypeDefinition = @"
 using System;
 using System.Runtime.InteropServices;
 public class Window {
-    [DllImport("kernel32.dll", SetLastError = true)]
-    public static extern IntPtr GetConsoleWindow();
-
-    [DllImport("user32.dll", SetLastError = true)]
+    [DllImport("user32.dll")]
     public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
 }
 "@
-Add-Type -TypeDefinition $TypeDefinition -ErrorAction SilentlyContinue
+    Add-Type -TypeDefinition $TypeDefinition
 
-# Directly capture the active UI container window handle
-$hWnd = [Window]::GetConsoleWindow()
-
-if ($hWnd -ne [IntPtr]::Zero) {
-    # Move window to center horizontally and maximize vertically
-    [void][Window]::MoveWindow($hWnd, $screenWidth, 0, $targetWidth, $screenHeight, $true)
-} else {
-    Write-Warning "Could not capture the hosting window handle."
+    if ($batchLaunch -eq 0)
+    {
+        # Get the current Powershell process window handle
+        $hWnd = (Get-Process -Id $PID).MainWindowHandle
+    }
+    else
+    {
+        # Get the current cmd.exe window handle that launched Powershell process
+        $parentID = (Get-CimInstance Win32_Process -Filter "ProcessId = $PID").ParentProcessId
+        $hWnd = (Get-Process -Id $parentID).MainWindowHandle
+    }
+    # Move window to of screen + 2 pixels center horizontally and resize it (Width=1024, Height=max height - taskbar)
+    [void][Window]::MoveWindow($hWnd, $screenWidth, 2, 1024, $screenHeight, $true)
 }
 
 Set-Location -Path $PSScriptRoot
