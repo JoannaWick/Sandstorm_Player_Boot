@@ -39,7 +39,7 @@ if ($buildNumber -ge 22000) {
         # Fallback to standard Mode Con formatting if running classic Conhost
         mode con: cols=120 lines=40
     }
-    } else {
+} else {
     <# 
         Resize and center window
     #>
