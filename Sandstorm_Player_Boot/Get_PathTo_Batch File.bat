@@ -9,9 +9,9 @@ echo "---===>>> Insurgency Sandstorm Downloading Server mods... Dirty Fix <<<===
 echo.
 echo The line below has been copied to your Clipboard and you can now paste it
 echo.
-echo "%~dp0Start_Player_Mod_Update.ps1" %%COMMAND%% 
+echo "%~dp0Start_Player_Mod_Update.bat" %%COMMAND%% 
 
-<nul set /p ="echo "%~dp0Start_Player_Mod_Update.ps1" %%COMMAND%% "| clip
+<nul set /p =""%~dp0Start_Player_Mod_Update.bat" %%COMMAND%% "| clip
 
 echo.
 echo In Steam Right-Click on Insurgency Sandstorm and select Properties.
