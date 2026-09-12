@@ -6,6 +6,10 @@ Add this script to Steam Launch Options for Insurgency Sandstorm and mod files w
 Change Log
 ==========
 
+1.0.2 (2026-09-12)
+
+    1. [FIXED] Wrong extension and an Echo in wrong place in Get_Path_to_Batch_File.bat
+    
 1.0.1 (2026-09-08)
 
     1. [FIXED] Added check for Windows 11 for centering and positioning window 
