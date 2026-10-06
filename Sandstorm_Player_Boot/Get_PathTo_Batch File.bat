@@ -67,7 +67,7 @@ echo The line below has been copied to your Clipboard and you can now paste it
 echo.
 echo "%~dp0Start_Player_Mod_Update.ps1" %%COMMAND%% 
 
-<nul set /p ="echo "%~dp0Start_Player_Mod_Update.ps1" %%COMMAND%% "| clip
+<nul set /p =""%~dp0Start_Player_Mod_Update.ps1" %%COMMAND%% "| clip
 
 echo.
 echo In Steam Right-Click on Insurgency Sandstorm and select Properties.
