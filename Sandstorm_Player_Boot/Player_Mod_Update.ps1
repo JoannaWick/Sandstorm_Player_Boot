@@ -300,6 +300,7 @@ function Stop-NetworkMonitor {
     Write-Host "`nMonitor stopped successfully." -ForegroundColor Green
 }
 
+
 Set-Location -Path $PSScriptRoot
 
 $settingsPath = Join-Path "$env:LOCALAPPDATA" "mod.io\globalsettings.json"
@@ -343,9 +344,55 @@ $ModListJsonPath = Join-Path -Path $PSScriptRoot -ChildPath "config\ModList.json
 
 if (-not(Test-Path $ModListJsonPath))
 {
+    $settingsPath = Join-Path "$env:LOCALAPPDATA" "mod.io\globalsettings.json"
+
+    if (Test-Path $settingsPath) {
+        $StoragePath = Get-Content -Raw -Path $settingsPath | ConvertFrom-Json
+    }
+    else
+    {
+        Write-Error "globalsettings.json File Missing at $settingsPath"
+        Write-Error "Exiting"
+        Pause
+        exit
+    }
+
+    $destination=$StoragePath.RootLocalStoragePath
+    $destination=$destination.Replace('/', '\')
+
+    $finalpath = Join-Path -Path $destination -ChildPath "254\metadata\state.json"
+
+    if (Test-Path $finalpath) {
+        $getstatejson = Get-Content -Raw -Path $finalpath | ConvertFrom-Json
+    }
+    else
+    {
+        Write-Error "state.json File Missing at $finalpath"
+        Write-Error "Exiting"
+        Pause
+        exit
+    }
+
 	$ModListData=@{}
     # Write initial ModList.json file
     # (so that the user doesn't have to go trough the setup again if the script doesn't run completely)
+    $ModListData | ConvertTo-Json | Set-Content $ModListJsonPath
+
+    # Scan state.json building initial ModList.json so mods not downloaded on first run.
+    $ModListData=Get-Content $ModListJsonPath | ConvertFrom-Json
+    # Loop through the Mods array and change the path
+    $getstatejson.Mods | ForEach-Object {
+        # Replace the path with the C: drive (adjust folder structure as needed)
+        $subname = $_.PSObject.Properties['Profile'].Value
+        $modid = $subname.modfile.'mod_id'
+        $date_added = $subname.modfile.'date_added'
+        $name = $subname.name
+
+        $ModListData | Add-Member -Name $modid -Value @{} -MemberType NoteProperty
+	    $ModListData.${modid}.date_added=$date_added
+        $ModListData.${modid}.name = $name
+    }
+
     $ModListData | ConvertTo-Json | Set-Content $ModListJsonPath
 }
 
