@@ -7,6 +7,8 @@ Add this script to Steam Launch Options for Insurgency Sandstorm and mod files w
 
 [![Joanna Wick's Sandstorm Website](http://sandstorm.dworks.work)](https://sandstorm.dworks.work)
 
+[![Watch the Sandstorm Player Boot Video Guide](https://img.youtube.com/vi/Z-6oHVC6LOA/0.jpg)](https://www.youtube.com/watch?v=Z-6oHVC6LOA)
+
 Change Log
 ==========
 
