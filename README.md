@@ -15,7 +15,7 @@ Change Log
     3. [ADDED] When launching for the first time as Administrator all files should be unblocked
                You should only be asked ONCE if you would like to run this script.
     4. [ADDED] Network Activity Graph will open and display Download and Upload speeds
-    5. [Added] When files are downloaded a Real Time Text Download Progress will display
+    5. [ADDED] When files are downloaded a Real Time Text Download Progress will display
                showing MB Downloaded, % Downloaded and ETA
 
 1.0.2 (2026-09-12)
