@@ -1,13 +1,11 @@
 # Sandstorm_Player_Boot
 Add this script to Steam Launch Options for Insurgency Sandstorm and mod files will be updated BEFORE the game launches.
 
-[![Watch the Sandstorm Player Boot Video Guide](https://www.youtube.com/watch?v=Z-6oHVC6LOA)](https://www.youtube.com/watch?v=Z-6oHVC6LOA)
-
-[![Watch the Sandstorm Player Boot Installation Video](https://youtu.be/hYGCZSsFLFg)](https://youtu.be/hYGCZSsFLFg)
-
-[![Joanna Wick's Sandstorm Website](http://sandstorm.dworks.work)](https://sandstorm.dworks.work)
+[![Watch the Sandstorm Player Boot Installation Video](https://img.youtube.com/vi/hYGCZSsFLFg/0.jpg)](https://www.youtube.com/watch?v=hYGCZSsFLFg)
 
 [![Watch the Sandstorm Player Boot Video Guide](https://img.youtube.com/vi/Z-6oHVC6LOA/0.jpg)](https://www.youtube.com/watch?v=Z-6oHVC6LOA)
+
+[![Joanna Wick's Sandstorm Website](http://sandstorm.dworks.work/images/banner3.jpg)](https://sandstorm.dworks.work)
 
 Change Log
 ==========
