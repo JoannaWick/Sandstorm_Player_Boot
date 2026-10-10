@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .NAME Player_Mod_Update
-.VERSION 1.1.0
+.VERSION 1.1.1
 .AUTHOR Joanna Wick
 .TAGS Sandstorm, Mods
 .PROJECTURI https://github.com/JoannaWick/Sandstorm_Player_Boot
@@ -315,7 +315,6 @@ else
 
 $destination=$StoragePath.RootLocalStoragePath
 $destination=$destination.Replace('/', '\')
-$destination_Store=$destination
 $verbose = 0
 $global:forced_updates = 0
 
@@ -340,10 +339,16 @@ $UserID=$getstatejson.Profile.id
 
 $enable_testing=0 # 0 - Disabled, 1 - Test Json output 
 
-$ModListJsonPath = Join-Path -Path $PSScriptRoot -ChildPath "config\ModList.json"
+$ModListJsonPath = Join-Path -Path "$env:LOCALAPPDATA" -ChildPath "JoannaWick\Sandstorm\ModList.json"
 
 if (-not(Test-Path $ModListJsonPath))
 {
+    $ParentDirectory = Split-Path -Path $ModListJsonPath -Parent
+
+    if (-not (Test-Path -Path $ParentDirectory)) {
+        $null = New-Item -Path $ParentDirectory -ItemType Directory -Force
+    }
+
     $settingsPath = Join-Path "$env:LOCALAPPDATA" "mod.io\globalsettings.json"
 
     if (Test-Path $settingsPath) {
