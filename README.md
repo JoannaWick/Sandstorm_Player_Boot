@@ -18,6 +18,12 @@ Joanna Wick's Sandstorm Website (Click image to go to website)
 Change Log
 ==========
 
+1.1.1 (2026-10-09)
+
+    1. [CHANGED] There is now a unified ModList.json that is used by both Sandstorm Player Boot and Sandstorm Mod Manager
+       This is stored in C:\Users\[ACCOUNTNAME]\appdata\local\JoannaWick\Sandstorm
+       This way when either Sandstorm Player Boot or Mod Manager updates mods the other program will know what was updated.
+    
 1.1.0 (2026-10-07)
 
     1. [FIXED] Issues with Windows 11 window positioning and resize
