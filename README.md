@@ -7,10 +7,6 @@ Watch the Sandstorm Player Boot Installation Video (Click Image to view)
 
 [![Watch the Sandstorm Player Boot Installation Video](https://img.youtube.com/vi/hYGCZSsFLFg/0.jpg)](https://www.youtube.com/watch?v=hYGCZSsFLFg)
 
-Watch the Sandstorm Player Boot Video Guide (Click Image to view)
-
-[![Watch the Sandstorm Player Boot Video Guide](https://img.youtube.com/vi/Z-6oHVC6LOA/0.jpg)](https://www.youtube.com/watch?v=Z-6oHVC6LOA)
-
 Joanna Wick's Sandstorm Website (Click image to go to website)
 
 [![Joanna Wick's Sandstorm Website](http://sandstorm.dworks.work/images/banner3.jpg)](https://sandstorm.dworks.work)
