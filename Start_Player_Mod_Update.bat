@@ -10,12 +10,19 @@ rem Set up the configuration file path
 set "cfgFile=%~dp0config\batchFirstRun.cfg"
 set "cfgValue=0"
 
-rem Read the config file if it exists
-if exist "%cfgFile%" set /p cfgValue=<"%cfgFile%"
+rem Read the config file if it exists, correctly handling spaces in paths
+if exist "%cfgFile%" (
+    for /f "usebackq delims=" %%a in ("%cfgFile%") do set "cfgValue=%%a"
+)
 
-rem Clean up the read value
+rem Clean up the read value (Removes spaces)
 set "cfgValue=%cfgValue: =%"
-if "%cfgValue%"=="ECHOisoff." set "cfgValue=0"
+
+rem Strip potential hidden Carriage Returns (\r) by extracting just the first character
+set "cfgValue=%cfgValue:~0,1%"
+
+rem Final fallbacks if the file was empty or corrupted
+if "%cfgValue%"=="E" set "cfgValue=0"
 if "%cfgValue%"=="" set "cfgValue=0"
 
 rem Jump straight to launching the game if it's not the first run
