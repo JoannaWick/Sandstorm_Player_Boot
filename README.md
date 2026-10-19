@@ -14,6 +14,11 @@ Joanna Wick's Sandstorm Website (Click image to go to website)
 Change Log
 ==========
 
+1.2.0 (2026-10-19)
+
+    1. [CHANGED]  The Download Progress Code has been re-written.  Some people were experiencing 
+                  red errors being displayed slowing down downloads.  This should fix those errors.
+
 1.1.1 (2026-10-09)
 
     1. [CHANGED] There is now a unified ModList.json that is used by both Sandstorm Player Boot and Sandstorm Mod Manager
