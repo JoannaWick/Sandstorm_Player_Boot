@@ -18,7 +18,7 @@ if ($buildNumber -ge 22000) {
     <# 
         Resize and center window
     #>
-<
+
     Add-Type -AssemblyName System.Windows.Forms
     $workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
 
