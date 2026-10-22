@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .NAME Player_Mod_Update
-.VERSION 1.2.0
+.VERSION 1.2.1
 .AUTHOR Joanna Wick
 .TAGS Sandstorm, Mods
 .PROJECTURI https://github.com/JoannaWick/Sandstorm_Player_Boot
@@ -15,19 +15,11 @@ $buildNumber = [Environment]::OSVersion.Version.Build
 
 if ($buildNumber -ge 22000) {
 
-    <# 
-        Resize and center window
-    #>
-
     Add-Type -AssemblyName System.Windows.Forms
     $workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
 
-    # Output the width and height
-    $targetWidth  = $workingArea.Width / 2
-    $targetHeight = $workingArea.Height
-
-    $posX = [math]::Round(($workingArea.Width - $targetWidth) / 2)
-    $posY = [math]::Round(($workingArea.Height - $targetHeight) / 2)
+    $posX = [math]::Round(($workingArea.Width - 600) / 2)
+    $posY = [math]::Round(($workingArea.Height - 600) / 2)
 
     # FIX: Define both MoveWindow AND GetForegroundWindow in a single C# block
 $Signature = @"
@@ -50,14 +42,12 @@ public class Win32 {
 
     if ($hWnd -ne [IntPtr]::Zero) {
         # Move and resize the current hosting cmd window frame instantly
-        [void][Win32]::MoveWindow($hWnd, $posX, $posY, $targetWidth, $targetHeight, $true)
+        [void][Win32]::MoveWindow($hWnd, $posX, $posY, 600, 600, $true)
     } else {
         # Fallback to standard Mode Con formatting if running classic Conhost
         mode con: cols=120 lines=40
     }
->
 } else {
-
     # Load the required .NET assembly
     Add-Type -AssemblyName System.Windows.Forms
 
@@ -65,8 +55,8 @@ public class Win32 {
     $workingArea = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
 
     # Output the width and height
-    $screenWidth  = ($workingArea.Width-1024)/2
-    $screenHeight = $workingArea.Height
+    $screenWidth  = ($workingArea.Width - 600)/2
+    $screenHeight = ($workingArea.Height - 600)/2
 
     # Definition for User32 MoveWindow
 $TypeDefinition = @"
@@ -91,7 +81,7 @@ public class Window {
         $hWnd = (Get-Process -Id $parentID).MainWindowHandle
     }
     # Move window to of screen + 2 pixels center horizontally and resize it (Width=1024, Height=max height - taskbar)
-    [void][Window]::MoveWindow($hWnd, $screenWidth, 2, 1024, $screenHeight, $true)
+    [void][Window]::MoveWindow($hWnd, $screenWidth, $screenHeight, 600, 600, $true)
 }
 
 function Start-NetworkMonitor {
