@@ -14,6 +14,10 @@ Joanna Wick's Sandstorm Website (Click image to go to website)
 Change Log
 ==========
 
+1.2.1 (2026-10-22)
+
+    1. [CHANGED]  Reduced the size of the window display.  Now closer to the Sandstorm Splash Screen size.
+
 1.2.0 (2026-10-19)
 
     1. [CHANGED]  The Download Progress Code has been re-written.  Some people were experiencing 
