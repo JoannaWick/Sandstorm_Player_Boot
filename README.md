@@ -14,6 +14,10 @@ Joanna Wick's Sandstorm Website (Click image to go to website)
 Change Log
 ==========
 
+1.2.2 (2026-10-25)
+
+    1. [REMOVED]  Removed the Network Activity GUI as there were too many issues with Windows 11 systems.
+
 1.2.1 (2026-10-22)
 
     1. [CHANGED]  Reduced the size of the window display.  Now closer to the Sandstorm Splash Screen size.
