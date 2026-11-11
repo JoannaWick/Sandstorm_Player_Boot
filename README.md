@@ -7,12 +7,21 @@ Watch the Sandstorm Player Boot Installation Video (Click Image to view)
 
 [![Watch the Sandstorm Player Boot Installation Video](https://img.youtube.com/vi/hYGCZSsFLFg/0.jpg)](https://www.youtube.com/watch?v=hYGCZSsFLFg)
 
+Watch the Sandstorm Player Boot Installation Video (Click Image to view)
+
+[![Watch the Sandstorm Player Boot Using Steam's Server Browser to join any Sandstorm Server Video](https://img.youtube.com/vi/Sgmn4FQk3eA/0.jpg)](https://www.youtube.com/watch?v=Sgmn4FQk3eA)
+
 Joanna Wick's Sandstorm Website (Click image to go to website)
 
 [![Joanna Wick's Sandstorm Website](http://sandstorm.dworks.work/images/banner3.jpg)](https://sandstorm.dworks.work)
 
 Change Log
 ==========
+
+2.0.0 (2026-11-11)
+
+    1. [ADDED] You can now use Steam's Server List to join any Sandstorm Server completely bypassing the Server List in the game.  Set up your own Favorite list so the servers you always play on are handy.  Just Double-click on a server and Sandstorm will Launch and join the selected server as soon as the Main Menu in the game appears.
+    2. [ADDED] If first run or an update the Start_Player_Mod_Update.bat will re-run itself in Admin mode to unblock all files.
 
 1.2.2 (2026-10-25)
 
