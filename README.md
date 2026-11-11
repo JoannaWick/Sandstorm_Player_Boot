@@ -1,5 +1,11 @@
 # Sandstorm_Player_Boot
 
+To  Install copy the Sandstorm_Player_Boot directory to where your Sandstorm Game is installed.
+
+Run Get_PathTo_Batch File.bat and follow the instructions to paste the launch information into the Insurgency Sandstorm Launch Options in Steam.
+
+You are all set.  You can now use the Steam Server Browser to launch Sandstorm and join any server while keeping your mods up to date.
+
 1. Automatically Downloads and Updates any mods that need it before the game launches.  Take less than 1 second to scan through over 100 mod subscriptions.  This displays a Download Progress for any mods being downloaded.  Avoids the Downloading Server Mods... screen on your regularly played servers.
 
 2. Use the Steam Server Browser to join ANY Sandstorm Server and avoid using the slow, broken Server Browser in the game.  This is much faster and easier to use.  Just click on the Servers button on the Steam Taskbar to see all Sandstorm servers.  Even save your Favorites in the Steam Server Browser.  Just double-click on a server and the game will load and join the sever no waiting.
