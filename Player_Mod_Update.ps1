@@ -1,6 +1,6 @@
 <#PSScriptInfo
 .NAME Player_Mod_Update
-.VERSION 1.2.2
+.VERSION 1.2.1
 .AUTHOR Joanna Wick
 .TAGS Sandstorm, Mods
 .PROJECTURI https://github.com/JoannaWick/Sandstorm_Player_Boot

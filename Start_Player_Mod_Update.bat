@@ -37,13 +37,11 @@ fltmc >nul 2>&1
 
 rem Checks if the previous command returned an error (1 or higher)
 if errorlevel 1 (
-    echo Must be in Administration Mode to UnBlock downloaded files.
-    echo This will allow Scripts to execute without User being asked for Permissions.
-    echo Administration mode will not be needed after this unless Script explicitly
-    echo asks for it.
-    pause
+    powershell -Command "Start-Process -FilePath '%0' -ArgumentList '%*' -Verb RunAs"
     exit /b
 )
+
+cd /d "%~dp0"
 
 echo First run detected. Elevated Administrator rights confirmed.
 echo Unblocking files...
@@ -63,12 +61,18 @@ echo.
 echo Done! Configuration batchFirstRun.cfg updated.
 echo User will not see this again.
 echo.
-pause
 
 :LaunchGame
 
-Powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Player_Mod_Update.ps1"
+:: 1. LOCK THE DIRECTORY IMMEDIATELY before shift breaks it
+set "SCRIPT_DIR=%~dp0"
 
-start "" %1 %2 %3 %4 %5 %6 %7 %8
+PowerShell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT_DIR%Player_Mod_Update.ps1"
+
+if /i "%~2"=="+connect" (
+    start /b "" PowerShell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT_DIR%Join_Server_IP.ps1" -IPAddress "%~3"
+)
+
+start "" %1 %2 %3 %4 %5 %6 %7 %8 %9 %10 %11 %12 %13
 
 rem Finished
