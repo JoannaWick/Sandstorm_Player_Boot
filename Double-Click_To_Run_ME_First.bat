@@ -37,7 +37,7 @@ fltmc >nul 2>&1
 
 rem Checks if the previous command returned an error (1 or higher)
 if errorlevel 1 (
-    powershell -Command "Start-Process -FilePath '%0' -ArgumentList '%*' -Verb RunAs"
+    powershell -Command "Start-Process -FilePath '%0' -Verb RunAs"
     exit /b
 )
 
