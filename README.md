@@ -1,6 +1,6 @@
 # Sandstorm_Player_Boot
 
-To  Install copy the Sandstorm_Player_Boot directory to where your Sandstorm Game is installed.
+To Install copy the Sandstorm_Player_Boot directory to where your Sandstorm Game is installed.  You are not required to install this in the Sandstorm game directory.  It will work in any location on your computer.  It is just more handy to have it located in the Sandstorm game directory located in "SteamLibrary\steamapps\common\sandstorm"
 
 Run Double-Click_To_Run_ME_First.bat to update the Steam Launch Options for Insurgency Sandstorm.  If there are Launch Options currently set for Insurgency Sandstorm they will be kept and the Player Boot added to the beginning of the current Launch Options.
 
