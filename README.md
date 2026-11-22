@@ -14,7 +14,7 @@ You can Ctrl+Click or Cmd+Click to open video in a new tab
 
 Watch the Sandstorm Player Boot Installation Video (Click Image to view)
 
-[![Watch the Sandstorm Player Boot Installation Video](https://img.youtube.com/vi/hYGCZSsFLFg/0.jpg)](https://www.youtube.com/watch?v=hYGCZSsFLFg)
+[![Watch the Sandstorm Player Boot Installation Video](https://img.youtube.com/vi/vhiLv75N5T0/0.jpg)](https://www.youtube.com/watch?v=vhiLv75N5T0)
 
 Watch the Sandstorm Player Boot Installation Video (Click Image to view)
 
