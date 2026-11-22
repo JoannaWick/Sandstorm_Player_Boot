@@ -2,7 +2,7 @@
 
 To  Install copy the Sandstorm_Player_Boot directory to where your Sandstorm Game is installed.
 
-Run Get_PathTo_Batch File.bat and follow the instructions to paste the launch information into the Insurgency Sandstorm Launch Options in Steam.
+Run Double-Click_To_Run_ME_First.bat to update the Steam Launch Options for Insurgency Sandstorm.  If there are Launch Options currently set for Insurgency Sandstorm they will be kept and the Player Boot added to the beginning of the current Launch Options.
 
 You are all set.  You can now use the Steam Server Browser to launch Sandstorm and join any server while keeping your mods up to date.
 
@@ -26,6 +26,11 @@ Joanna Wick's Sandstorm Website (Click image to go to website)
 
 Change Log
 ==========
+
+2.1.0 (2026-11-22)
+
+    1. [ADDED] Double-Click_To_Run_ME_First.bat which executes UpdateSandstormLaunchOptions.ps1 and edits Insurgency Sandstorm Steam Launch Options to include the path to Start_Player_Mod_Update.bat.  No more cut and paste needed by the user. If Steam is running when double-clicked the script will stop Steam, update the Launch Options for Insurgency Sandstorm and then restart Steam.  If Steam is not running the Launch Options are updated and the script quits.  Steam MUST be stopped before the Launch Options are edited.  If the Launch Options are edited while Steam is running the old Launch Options will be saved back from the Cloud when you exit Steam.
+    2. [DEPRECATED] Get_PathTo_Batch File.bat
 
 2.0.0 (2026-11-11)
 
